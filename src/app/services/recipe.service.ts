@@ -9,7 +9,7 @@ import { ShoppingListService } from './shoppingList.service';
 export class RecipeService {
   recipesUpdated = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
+  /*private recipes: Recipe[] = [
     new Recipe(
       'Meat Dish',
       'Dish from meat',
@@ -50,9 +50,16 @@ export class RecipeService {
         new Ingredient('Mozzarella', 3),
       ]
     ),
-  ];
+  ];*/
+
+  private recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesUpdated.next([...this.recipes]);
+  }
 
   getRecipes() {
     return [...this.recipes];
